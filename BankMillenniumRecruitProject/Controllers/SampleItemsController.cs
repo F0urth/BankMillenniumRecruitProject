@@ -25,14 +25,14 @@ namespace BankMillenniumRecruitProject.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("{format}"), FormatFilter]
         public async Task<ActionResult<IEnumerable<SampleItemInfo>>> GetSampleItems()
         {
             _logger.LogInformation("GetSampleItems");
             return (await _sampleItemService.GetAllSampleItems()).ToList();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}/{format}"), FormatFilter]
         public async Task<ActionResult<SampleItemInfo>> GetSampleItem(long id)
         {
             _logger.LogInformation("GetSampleItem");
@@ -46,7 +46,8 @@ namespace BankMillenniumRecruitProject.Controllers
             return sampleItem;
         }
 
-        [HttpPut("{id}")]
+        // throws error in swagger but works
+        [HttpPut("{id}/{format}"), FormatFilter]
         public async Task<IActionResult> PutSampleItem(long id, SampleItemInfo sampleItem)
         {
             _logger.LogInformation("PutSampleItem");
@@ -74,7 +75,7 @@ namespace BankMillenniumRecruitProject.Controllers
             return NoContent();
         }
 
-        [HttpPost]
+        [HttpPost("{format}"), FormatFilter]
         public async Task<ActionResult<SampleItemInfo>> PostSampleItem(SampleItemInfo sampleItem)
         {
             _logger.LogInformation("PostSampleItem");
@@ -83,7 +84,7 @@ namespace BankMillenniumRecruitProject.Controllers
             return CreatedAtAction("GetSampleItem", new { id = item.Id }, item);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}/{format}"), FormatFilter]
         public async Task<IActionResult> DeleteSampleItem(long id)
         {
             _logger.LogInformation("DeleteSampleItem");

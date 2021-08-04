@@ -11,6 +11,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BankMillenniumRecruitProject.Data;
+using BankMillenniumRecruitProject.Services;
+using BankMillenniumRecruitProject.Services.Factories;
+using BankMillenniumRecruitProject.Services.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace BankMillenniumRecruitProject
@@ -28,9 +31,13 @@ namespace BankMillenniumRecruitProject
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers().AddXmlDataContractSerializerFormatters();
 
             services.AddDbContext<MillenniumDbContext>(opt => opt.UseInMemoryDatabase("ExerciseDatabase"));
+
+            services.AddScoped<ISampleItemRepository, SampleItemRepository>();
+            services.AddScoped<ISampleItemService, SampleItemService>();
+            services.AddScoped<SampleItemFactory>();
 
             services.AddSwaggerGen(c =>
             {

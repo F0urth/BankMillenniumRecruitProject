@@ -7,13 +7,15 @@ namespace BankMillenniumRecruitProject.Interfaces
 {
     public interface IRepository<T> where T : class
     {
-        public void Add(T entity);
+        public Task<T> Add(T entity);
 
-        public void Remove(T entity);
+        public Task Remove(long id);
 
-        public void Update(T entity);
+        public Task Update(T entity);
 
-        public T Get(long id);
+        public Task<T> Get(long id);
+
+        public Task<bool> IsExists(long id);
 
         public IQueryable<T> GetAll();
     }

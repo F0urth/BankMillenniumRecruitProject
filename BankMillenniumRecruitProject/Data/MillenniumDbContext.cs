@@ -8,5 +8,8 @@ namespace BankMillenniumRecruitProject.Data
 {
     public class MillenniumDbContext : DbContext
     {
+        public MillenniumDbContext(DbContextOptions options) : base(options) { }
+
+        public DbSet<SampleItem> SampleItems { get; set; }
     }
 }
